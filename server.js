@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.use('/user', require('./routes/user'));
 app.use('/comment', require('./routes/comment'));
+app.use('/authenticate', require('./routes/authenticate'));
 
 app.get('/', (req, res) => {
   res.send('Hello to Nichols Canyon');

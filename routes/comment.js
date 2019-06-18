@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 
 //@route    POST /comment/:id
 //@desc     Creates a new comment in the DB
@@ -37,5 +38,45 @@ router.get('/', async (req, res) => {
 //@route    DELETE /comment/:id
 //@desc     Delete a comment in the DB
 //@access   Private
+router.delete('/:id', async (req, res) => {
+  try {
+    const userId = req.body._id;
+    const commentId = req.params.id;
+
+    const user = await User.findById(userId);
+    if(!user) {
+      throw error;
+    } else {
+      const comments = await Comment.findOneAndDelete({_id: commentId});
+      res.status(200).json({message: 'Comment deleted'});
+    };
+  } catch(err) {
+    console.log(err);
+    res.status(400).send('The request has failed.');
+  };
+});
+
+//@route    Patch /comment/:id
+//@desc     Update a comment in the DB
+//@access   Private
+router.patch('/:id', async (req, res) => {
+  try {
+    const userId = req.body._id;
+    const text = req.body.text
+    const commentId = req.params.id;
+
+    const user = await User.findById(userId);
+    if(!user) {
+      throw error;
+    } else {
+      const update = await Comment.findOneAndUpdate(
+        {_id: commentId}, {text}, {new: true});
+      res.status(200).json(update);
+    };
+  } catch(err) {
+    console.log(err);
+    res.status(400).send('The request has failed.');
+  };
+});
 
 module.exports = router;
