@@ -1,0 +1,8 @@
+.jumboImg {
+  background-image: url("/assets/nicholsHollywood.jpg");
+  background-size: cover;
+}
+
+.jumboText {
+  background-color: #dff7f6;
+}
