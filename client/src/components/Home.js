@@ -13,7 +13,6 @@ const Home = () => {
         <br />
         <br />
         <br />
-        <br />
       </Jumbotron>
 
       <Container>
@@ -89,9 +88,9 @@ const Home = () => {
                 </Card.Text>
                 <Card.Text>
                   <b>And it's secure. </b>  Your privacy is protected here.  However, the
-                  same can't be said about when you ride the real thing.
+                  same can't be said when you ride the real thing.
                 </Card.Text>
-                <Card.Link href="#">Sign up</Card.Link>
+                <Card.Link href="/signup">Sign up</Card.Link>
                 <Card.Link href="#">Login</Card.Link>
               </Card.Body>
             </Card>
@@ -152,7 +151,7 @@ const Home = () => {
       </Container>
 
       <Container fluid>
-        <Navbar expand="lg" variant="light" bg="light">
+        <Navbar expand="lg" variant="light" bg="light" fixed="bottom">
         <Navbar.Brand>2019 Le Tour de Nichols&#8482;</Navbar.Brand>
         </Navbar>
       </Container>

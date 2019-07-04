@@ -4,11 +4,11 @@ import {Navbar, Nav, Container} from 'react-bootstrap';
 const Header = () => {
 
   return (
-      <Navbar bg="dark" variant="dark" fixed="top">
-          <Navbar.Brand href="#home">Le Tour de Nichols</Navbar.Brand>
+      <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="/">Le Tour de Nichols</Navbar.Brand>
           <Nav className="ml-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">About</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="#pricing">Login</Nav.Link>
           </Nav>
       </Navbar>
