@@ -91,7 +91,7 @@ const Home = () => {
                   same can't be said when you ride the real thing.
                 </Card.Text>
                 <Card.Link href="/signup">Sign up</Card.Link>
-                <Card.Link href="#">Login</Card.Link>
+                <Card.Link href="/login">Login</Card.Link>
               </Card.Body>
             </Card>
           </Col>
@@ -149,13 +149,6 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-
-      <Container fluid>
-        <Navbar expand="lg" variant="light" bg="light" fixed="bottom">
-        <Navbar.Brand>2019 Le Tour de Nichols&#8482;</Navbar.Brand>
-        </Navbar>
-      </Container>
-
     </div>
   );
 };
