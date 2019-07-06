@@ -126,6 +126,17 @@ const Home = () => {
                 <blockquote className="blockquote mb-0">
                   <p>
                     {' '}
+                    Before touring Nichols Canyon, I always tour <i>Le Tour de
+                    Nichols</i>.{' '}
+                  </p>
+                  <footer className="blockquote-footer">
+                    <i>Serena W.</i>
+                  </footer>
+                </blockquote>
+                <br />
+                <blockquote className="blockquote mb-0">
+                  <p>
+                    {' '}
                     Don't enter the canyon without taking safety precautions.
                     Goggles are a must.{' '}
                   </p>
