@@ -4,7 +4,6 @@ import Header from './components/Header';
 import About from './components/About';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import Footer from './components/Footer';
 import MyDashboard from './components/MyDashboard';
 import RouteGuide from './components/RouteGuide';
 import Subtropics from './components/Subtropics';
@@ -31,7 +30,6 @@ function App() {
           <Route path="/summit" component={Summit} />
           <Route path="/communityboard" component={CommunityBoard} />
         </Switch>
-        <Footer />
       </div>
     </Router>
   );

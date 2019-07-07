@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, Row, Col, Jumbotron, Image, Card, Navbar} from 'react-bootstrap';
+import Footer from './Footer';
 import styles from '../css/home.module.css';
 
 const Home = () => {
@@ -94,6 +95,17 @@ const Home = () => {
                 <Card.Link href="/login">Login</Card.Link>
               </Card.Body>
             </Card>
+
+            <Card style={{marginTop: "25px"}}>
+              <Card.Title>LA's path of cycling enlightenment</Card.Title>
+              <Card.Img variant="top" src="/assets/nicholsStar.jpg" />
+              <Card.Body>
+                <Card.Text>
+                  With 820 feet of vertical climb, you will soon understand why this
+                  is regarded as the real Grand Canyon.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
 
           <Col>
@@ -160,6 +172,8 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
+
+      <Footer />
     </div>
   );
 };
