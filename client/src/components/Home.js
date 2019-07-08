@@ -26,11 +26,11 @@ const Home = () => {
         </Jumbotron>
       </Container>
 
-      <div className="mb-4">
+      <div>
         <Container>
-          <Row>
-            <Col>
-              <Card className="md-4">
+          <Row className="justify-content-center">
+            <Col md={4}>
+              <Card>
                 <Card.Body>
                   <Card.Title>Lush subtropics</Card.Title>
                   <Card.Text>
@@ -40,8 +40,8 @@ const Home = () => {
                 <Card.Img variant="top" src="/assets/recycleBin.jpg" />
               </Card>
             </Col>
-            <Col>
-              <Card className="md-4">
+            <Col md={4}>
+              <Card>
                 <Card.Body>
                   <Card.Title>Towering high country ridges</Card.Title>
                   <Card.Text>
@@ -51,8 +51,8 @@ const Home = () => {
                 <Card.Img variant="top" src="/assets/ridgeline.jpg" />
               </Card>
             </Col>
-            <Col>
-              <Card className="md-4">
+            <Col md={4}>
+              <Card>
                 <Card.Body>
                   <Card.Title>The summit</Card.Title>
                   <Card.Text>
@@ -68,9 +68,9 @@ const Home = () => {
       </div>
 
       <Container>
-        <Row>
-          <Col>
-            <Card>
+        <Row className="justify-content-center">
+          <Col md={6}>
+            <Card style={{marginTop: "25px"}}>
               <Card.Body>
                 <Card.Title>Few dare to enter Nichols Canyon.</Card.Title>
                 <Card.Title>Even fewer dare to enter this website.</Card.Title>
@@ -108,8 +108,8 @@ const Home = () => {
             </Card>
           </Col>
 
-          <Col>
-            <Card>
+          <Col md={6}>
+            <Card style={{marginTop: "25px"}}>
               <Card.Header>Testimonies</Card.Header>
               <Card.Body>
                 <blockquote className="blockquote mb-0">
@@ -172,7 +172,6 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-
       <Footer />
     </div>
   );
