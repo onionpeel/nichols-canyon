@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Jumbotron, Image, Card, Navbar} from 'react-bootstrap';
+import {Container, Row, Col, Jumbotron, Card} from 'react-bootstrap';
 import Footer from './Footer';
 import styles from '../css/home.module.css';
 

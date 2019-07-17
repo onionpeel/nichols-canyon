@@ -5,39 +5,66 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const config = require('config');
 const jwtKey = config.get('jwtKey');
+const {check, validationResult} = require('express-validator/check');
 const tokenAuth = require('../middleware/tokenAuth');
 
 //@route    POST /user
 //@desc     Creates a new user in the DB
 //@access   Public
-router.post('/', async (req, res) => {
-  try {
-    //Encrypt password
-    let password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    password = await bcrypt.hash(password, salt);
-
-    //Create new user and store in DB
-    let newUser = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password
-    });
-    let user = await newUser.save();
-
-    //Create token and send token back to client
-    const payload = {
-      id: user._id
+router.post(
+  '/',
+  [
+    check('name', 'User name is required').isLength({min: 1}),
+    check('email', 'Email is required').isEmail(),
+    check('password', 'Password must be at least six characters').isLength({min: 6})
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return res.status(422).json({errors: errors.array()});
     };
-    const token = await jwt.sign(payload, jwtKey)
 
-    //Return token and new user to the client
-    res.status(201).json({token, user});
-  }catch(err) {
-    console.log(err);
-    res.status(500).json({message: 'A new user was not created'});
+    try {
+      let email = req.body.email;
+      let existingUser = await User.findOne({email});
+      if(existingUser) {
+        return res
+          .status(400)
+          .json({errors: [{msg: 'A user with that email already exists'}]});
+      };
+
+      //Encrypt password
+      let password = req.body.password;
+      const salt = await bcrypt.genSalt(10);
+      password = await bcrypt.hash(password, salt);
+
+      //Create new user and store in DB
+      let newUser = new User({
+        name: req.body.name,
+        email,
+        password
+      });
+      let returnUser = await newUser.save();
+
+      //Create token and send token back to client
+      const payload = {
+        id: returnUser._id
+      };
+      const token = await jwt.sign(payload, jwtKey)
+
+      //Return token and new user to the client
+      const user = {
+        id: returnUser.id,
+        name: returnUser.name,
+        email: returnUser.email
+      };
+      res.status(201).json({token, user});
+    }catch(err) {
+      console.log(err);
+      res.status(500).json({message: 'A new user was not created'});
+    };
   }
-});
+);
 
 //@route    GET /user
 //@desc     Gets all users from the DB

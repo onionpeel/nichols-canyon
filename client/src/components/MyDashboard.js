@@ -1,11 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {ListGroup, Card, Container, Row, Col} from 'react-bootstrap';
-import RouteGuide from './RouteGuide';
+import {Redirect} from 'react-router-dom';
 import Footer from './Footer';
 
-const MyDashboard = () => {
+const MyDashboard = ({isAuthenticated}) => {
 
-  return (
+  const authenticated = (
     <div>
       <div>
         <Container>
@@ -38,16 +39,28 @@ const MyDashboard = () => {
                     Community Board
                   </ListGroup.Item>
                 </ListGroup>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <Footer />
     </div>
-
-    <Footer />
-  </div>
-
   );
+
+  const notAuthenticated = (
+    <Redirect to="/" />
+  );
+
+  return (
+    <div>
+      {isAuthenticated ? authenticated : notAuthenticated}
+    </div>
+  )
 };
 
-export default MyDashboard;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, null)(MyDashboard);

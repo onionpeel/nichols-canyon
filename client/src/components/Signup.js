@@ -1,24 +1,37 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Form, Container, Navbar, Row, Col, Button} from 'react-bootstrap';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
+import {register} from '../actions/authActions';
 
-const Signup = () => {
+const Signup = ({isAuthenticated, register}) => {
   const [profile, setProfile] = useState({
-      username: '',
+      name: '',
       email: '',
-      password1: '',
-      password2: ''
+      password: ''
   });
 
-  const {username, email, password1, password2} = profile;
+  const {name, email, password} = profile;
 
   const handleOnChange = e => {
-    setProfile({...profile, [e.target.name]: e.target.value});
+    setProfile({
+      ...profile,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleOnSubmit = e => {
-    e.prevent.default();
+    e.preventDefault();
 
+    register({
+      name: profile.name,
+      email: profile.email,
+      password: profile.password
+    });
+  };
+
+  if(isAuthenticated) {
+    return <Redirect to='/mydashboard'/>
   };
 
   return (
@@ -41,14 +54,14 @@ const Signup = () => {
         <Container>
           <Row className="justify-content-center">
             <Col md={6}>
-              <Form>
-                <Form.Group controlId="formGroupUsername">
-                  <Form.Label>Username</Form.Label>
+              <Form onSubmit={handleOnSubmit}>
+                <Form.Group controlId="formGroupName">
+                  <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Username"
-                    value={username}
-                    name="username"
+                    placeholder="Name"
+                    value={name}
+                    name="name"
                     onChange={handleOnChange}
                   />
                 </Form.Group>
@@ -62,30 +75,20 @@ const Signup = () => {
                     onChange={handleOnChange}
                   />
                 </Form.Group>
-                <Form.Group controlId="formGroupPassword1">
+                <Form.Group controlId="formGroupPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="Password"
-                    value={password1}
-                    name="password1"
+                    value={password}
+                    name="password"
                     onChange={handleOnChange}
                   />
                 </Form.Group>
-                <Form.Group controlId="formGroupPassword2">
-                  <Form.Label>Confirm password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    value={password2}
-                    name="password2"
-                    onChange={handleOnChange}
-                  />
-                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
               </Form>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
             </Col>
           </Row>
         </Container>
@@ -102,4 +105,12 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = {
+  register
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -1,4 +1,7 @@
 import React from 'react';
+import {Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import Home from './components/Home';
 import Header from './components/Header';
 import About from './components/About';
@@ -11,28 +14,48 @@ import HighCountry from './components/HighCountry';
 import Summit from './components/Summit';
 import CommunityBoard from './components/CommunityBoard';
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-function App() {
+function App({isAuthenticated}) {
+  const PrivateRoute = ({component: Component, ...rest}) => {
+    return (
+      <Route
+        {...rest}
+        render={props =>
+          isAuthenticated ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login"
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
+
   return (
-    <Router>
-      <div>
-        <Header />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/mydashboard" component={MyDashboard} />
-          <Route path='/routeguide' component={RouteGuide} />
-          <Route path="/subtropics" component={Subtropics} />
-          <Route path="/highcountry" component={HighCountry} />
-          <Route path="/summit" component={Summit} />
-          <Route path="/communityboard" component={CommunityBoard} />
-        </Switch>
-      </div>
-    </Router>
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <PrivateRoute path="/mydashboard" isAuthenticated={isAuthenticated} component={MyDashboard} />
+        <PrivateRoute path='/routeguide' isAuthenticated={isAuthenticated} component={RouteGuide} />
+        <PrivateRoute path="/subtropics" isAuthenticated={isAuthenticated} component={Subtropics} />
+        <PrivateRoute path="/highcountry" isAuthenticated={isAuthenticated} component={HighCountry} />
+        <PrivateRoute path="/summit" isAuthenticated={isAuthenticated} component={Summit} />
+        <PrivateRoute path="/communityboard" isAuthenticated={isAuthenticated} component={CommunityBoard} />
+      </Switch>
+    </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, null)(App);
