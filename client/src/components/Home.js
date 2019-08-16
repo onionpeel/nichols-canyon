@@ -124,6 +124,16 @@ const Home = () => {
                   </footer>
                 </blockquote>
                 <br />
+                  <blockquote className="blockquote mb-0">
+                    <p>
+                      {' '}
+                      Nichols is a golden boot...in your backside.{' '}
+                    </p>
+                    <footer className="blockquote-footer">
+                      <i>Megan R.</i>
+                    </footer>
+                  </blockquote>
+                  <br />
                 <blockquote className="blockquote mb-0">
                   <p>
                     {' '}
@@ -138,11 +148,12 @@ const Home = () => {
                 <blockquote className="blockquote mb-0">
                   <p>
                     {' '}
-                    Before touring Nichols Canyon, I always tour <i>Le Tour de
+                    Before going on tour I always tour Nichols Canyon.  And before
+                    touring Nichols Canyon I always tour <i>Le Tour de
                     Nichols</i>.{' '}
                   </p>
                   <footer className="blockquote-footer">
-                    <i>Serena W.</i>
+                    <i>Mariah C.</i>
                   </footer>
                 </blockquote>
                 <br />
@@ -160,8 +171,24 @@ const Home = () => {
                 <blockquote className="blockquote mb-0">
                   <p>
                     {' '}
+                    Anyone who says clay or grass is the most challenging
+                    has never taken on the asphalt in Nichols Canyon.{' '}
+                  </p>
+                  <footer className="blockquote-footer">
+                    <i>Serena W.</i>
+                  </footer>
+                </blockquote>
+                <br />
+                <blockquote className="blockquote mb-0">
+                  <p>
+                    {' '}
                     I fully expect Nichols Canyon one day to receive the Nobel
                     Prize in bicycle climbs.{' '}
+                  </p>
+                  <p>
+                    {' '}
+                    The formula <i>e = nc<sup>2</sup></i> is foundational to
+                    our understanding of the universe.{' '}
                   </p>
                   <footer className="blockquote-footer">
                     <i>Albert E.</i>

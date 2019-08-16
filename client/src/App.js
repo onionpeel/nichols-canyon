@@ -1,6 +1,7 @@
-import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import React, {useEffect, Component} from 'react';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Button} from 'react-bootstrap';
 
 import Home from './components/Home';
 import Header from './components/Header';
@@ -14,14 +15,19 @@ import HighCountry from './components/HighCountry';
 import Summit from './components/Summit';
 import CommunityBoard from './components/CommunityBoard';
 
+import {loadUser} from './actions/authActions';
 
-function App({isAuthenticated}) {
+const App = ({isAuthenticated, loadUser}) => {
+  useEffect(() => {
+    loadUser();
+  });
+
   const PrivateRoute = ({component: Component, ...rest}) => {
     return (
       <Route
         {...rest}
         render={props =>
-          isAuthenticated ? (
+          isAuthenticated === true ? (
             <Component {...props} />
           ) : (
             <Redirect
@@ -51,11 +57,15 @@ function App({isAuthenticated}) {
         <PrivateRoute path="/communityboard" isAuthenticated={isAuthenticated} component={CommunityBoard} />
       </Switch>
     </div>
-  );
-}
+  )
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = {
+  loadUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

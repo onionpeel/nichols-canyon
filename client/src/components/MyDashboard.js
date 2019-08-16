@@ -1,12 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {ListGroup, Card, Container, Row, Col} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 import Footer from './Footer';
+import {Link} from 'react-router-dom';
 
-const MyDashboard = ({isAuthenticated}) => {
-
-  const authenticated = (
+const MyDashboard = () => {
+  return (
     <div>
       <div>
         <Container>
@@ -23,21 +22,36 @@ const MyDashboard = ({isAuthenticated}) => {
                 </Card.Body>
 
                 <ListGroup>
-                  <ListGroup.Item action href="/routeguide" variant="light">
-                    The Route
+                  <ListGroup.Item variant="light">
+                    <Link to="/routeguide">
+                      The Route
+                    </Link>
                   </ListGroup.Item>
-                  <ListGroup.Item action href="/subtropics" variant="light">
-                    Subtropics
+
+                  <ListGroup.Item variant="light">
+                    <Link to="/subtropics">
+                      Subtropics
+                    </Link>
                   </ListGroup.Item>
-                  <ListGroup.Item action href="/highcountry" variant="light">
-                    High Country
+
+                  <ListGroup.Item variant="light">
+                    <Link to="/highcountry">
+                      High Country
+                    </Link>
                   </ListGroup.Item>
-                  <ListGroup.Item action href="/summit" variant="light">
-                    Summit
+
+                  <ListGroup.Item variant="light">
+                    <Link to="/summit">
+                      Summit
+                    </Link>
                   </ListGroup.Item>
-                  <ListGroup.Item action href="/communityboard" variant="light">
-                    Community Board
+
+                  <ListGroup.Item variant="light">
+                    <Link to="/communityboard">
+                      Community Board
+                    </Link>
                   </ListGroup.Item>
+
                 </ListGroup>
               </Card>
             </Col>
@@ -47,20 +61,8 @@ const MyDashboard = ({isAuthenticated}) => {
       <Footer />
     </div>
   );
-
-  const notAuthenticated = (
-    <Redirect to="/" />
-  );
-
-  return (
-    <div>
-      {isAuthenticated ? authenticated : notAuthenticated}
-    </div>
-  )
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
+export default MyDashboard;
 
-export default connect(mapStateToProps, null)(MyDashboard);
+// export default MyDashboard;

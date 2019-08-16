@@ -1,13 +1,75 @@
-import React from 'react';
-import {} from 'react-bootstrap';
+import React, {useEffect} from 'react';
+import {ListGroup, Card, Container, Row, Col} from 'react-bootstrap';
+import {Redirect} from 'react-router-dom';
+import Footer from './Footer';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getAllComments} from '../actions/commentActions.js';
 
-const CommunityBoard = () => {
+const CommunityBoard = ({comments, getAllComments}) => {
+  useEffect(() => {
+    getAllComments();
+  });
 
   return (
     <div>
-      The community board will be here
+      <div>
+        <Container>
+          <Row className="justify-content-center">
+            <Col md={8}>
+              <Card style={{marginTop: '25px'}}>
+                <Card.Img variant="top" src="/assets/dumping.jpg" />
+
+                <Card.Body>
+                  <Card.Title>
+                    Get advice or share your expertise!
+                  </Card.Title>
+
+                </Card.Body>
+              </Card>
+
+              <ListGroup>
+                {comments.map(({_id, text}) => (
+                  <ListGroup.Item key={_id}>
+                    {text}
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+
+
+              <Card style={{marginTop: '25px'}}>
+                <Card.Text>
+                  This is what I want to say...
+                </Card.Text>
+                <Card.Subtitle>
+                  me@memail.com
+                </Card.Subtitle>
+              </Card>
+
+              <Card style={{marginTop: '25px'}}>
+                <Card.Text>
+                  This is what I want to say...
+                </Card.Text>
+                <Card.Subtitle>
+                  me@memail.com
+                </Card.Subtitle>
+              </Card>
+
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <Footer />
     </div>
   );
 };
 
-export default CommunityBoard;
+const mapStateToProps = state => ({
+  comments: state.comm.comments
+});
+
+const mapDispatchToProps = {
+  getAllComments
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommunityBoard);

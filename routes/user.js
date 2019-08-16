@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const config = require('config');
 const jwtKey = config.get('jwtKey');
-const {check, validationResult} = require('express-validator/check');
+const {check, validationResult} = require('express-validator');
 const tokenAuth = require('../middleware/tokenAuth');
 
 //@route    POST /user
@@ -97,8 +97,12 @@ router.get('/users/:id', async (req, res) => {
 //@desc     Gets the currently authenticated user from the DB
 //@access   Private
 router.get('/me', tokenAuth, async (req, res) => {
-  const user = await User.findById({_id: req.user});
-  res.status(200).json(user);
+  try{
+    const user = await User.findById({_id: req.user});
+    res.status(200).json(user);
+  }catch(err) {
+    res.status(400).json({message: 'User not found'});
+  };
 });
 
 module.exports = router;

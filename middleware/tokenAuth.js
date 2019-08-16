@@ -9,7 +9,6 @@ const tokenAuth = async (req, res, next) => {
   if(!token) {
     return res.status(401).json({message: 'User is unauthorized.'})
   };
-
   try {
     //Extract user ID from the token
     const decoded = await jwt.verify(token, jwtKey);

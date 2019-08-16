@@ -4,7 +4,7 @@ const Comment = require('../models/Comment');
 const User = require('../models/User');
 const tokenAuth = require('../middleware/tokenAuth');
 
-//@route    POST /comment/:id
+//@route    POST /comment
 //@desc     Creates a new comment in the DB
 //@access   Private
 router.post('/', tokenAuth, async (req, res) => {

@@ -10,10 +10,6 @@ const Login = ({isAuthenticated, login}) => {
     password: ''
   });
 
-  useEffect(() => {
-    return <Redirect to='/mydashboard'/>
-  }, [isAuthenticated]);
-
   const handleOnChange = e => {
     setUser({
       ...user,
@@ -27,6 +23,10 @@ const Login = ({isAuthenticated, login}) => {
       email: user.email,
       password: user.password
     });
+  };
+
+  if(isAuthenticated) {
+    return <Redirect to='/mydashboard'/>
   };
 
   return (

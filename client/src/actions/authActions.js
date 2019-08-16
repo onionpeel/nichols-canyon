@@ -1,5 +1,27 @@
 import axios from 'axios';
-import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT_SUCCESS, LOGIN_SUCCESS} from './types';
+import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT_SUCCESS, LOGIN_SUCCESS, USER_LOADED} from './types';
+
+export const loadUser = () => async (dispatch, getState) => {
+  try{
+    const token = localStorage.getItem('token');
+    const config = {
+      headers: {
+        'x-auth-token': token,
+        'Content-Type': 'application/json'
+      }
+    };
+
+    if(token) {
+      const res = await axios.get('/user/me', config);
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
+    };
+  }catch(err) {
+    console.log('The authActions error', err);
+  };
+};
 
 export const register = ({name, email, password}) => async dispatch => {
   const config = {
@@ -23,10 +45,11 @@ export const register = ({name, email, password}) => async dispatch => {
 };
 
 export const logout = dispatch => {
+  localStorage.removeItem('token');
+
   dispatch({
     type: LOGOUT_SUCCESS
   });
-  localStorage.removeItem('token');
 };
 
 export const login = ({email, password}) => async dispatch => {

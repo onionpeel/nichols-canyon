@@ -1,0 +1,34 @@
+import React from 'react';
+import {Navbar, Nav} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {logout} from '../actions/authActions';
+
+const HeaderLogOut = ({user, logout}) => {
+  return (
+      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+        <Navbar.Brand href="/">Le Tour de Nichols</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto">
+            <Navbar.Text>
+              Welcome {user.name}
+            </Navbar.Text>
+            <Nav.Link href="/mydashboard">My Dashboard</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+            <Navbar.Text>Logout</Navbar.Text>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+  );
+};
+
+const mapStateToProps = state => ({
+    user: state.auth.user
+});
+
+const mapDispatchToProps = {
+  logout
+};
+
+export default connect(mapStateToProps, {logout})(HeaderLogOut);

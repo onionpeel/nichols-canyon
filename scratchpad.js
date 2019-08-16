@@ -1,21 +1,69 @@
-// const objInput = ({name, age}) => {
-//   console.log(name);
+// const arr = [1,2,3,4,5,5,5,5];
+//
+// const noDuplicate = array => {
+//   const setArr = new Set(arr);
+//   return Array.from(setArr);
 // };
 //
-// objInput({name: "me", age: 100});
+// console.log(noDuplicate(arr));
 
-// let x = 7;
-// const sayNumber = () => {
-//   console.log(x);
+// const obj = {
+//   value: 3,
+//
+//   display() {
+//     console.log(this.value);
+//   }
 // };
-// sayNumber();
+//
+// obj.display();
 
-const insideFun = () => {
-  console.log('Im inside');
+// let value = 0;
+
+// const obj = {
+//   value: 5,
+//
+//   display() {
+//     this.value = 10;
+//     console.log('display: ', this.value);
+//
+//     let innerDisplay = function(newValue) {
+//       this.value = newValue;
+//     };
+//
+//     innerDisplay(15);
+//     console.log("new value: ", window.value);
+//   }
+// };
+//
+// obj.display();
+
+// function display() {
+//   const value = 7;
+//
+//   function inner() {
+//     console.log(value);
+//   };
+//
+//   return inner;
+// };
+//
+// let newFunc = display();
+// newFunc();
+
+const obj = {
+  value: 5,
+
+  display() {
+    this.value = 10;
+    console.log('display: ', this.value);
+
+    let innerDisplay = newValue => {
+      this.value = newValue;
+    };
+
+    innerDisplay(15);
+    console.log("new value: ", this.value);
+  }
 };
 
-const outsideFun = ({insideFun}) => {
-  insideFun();
-};
-
-outsideFun();
+obj.display();

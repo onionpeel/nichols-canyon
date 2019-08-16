@@ -1,5 +1,7 @@
 import React from 'react';
 import {Container, Card, Row, Col, Button} from 'react-bootstrap';
+import {connect} from 'react-redux';
+
 
 const RouteGuide = () => {
 
@@ -35,4 +37,4 @@ const RouteGuide = () => {
   );
 };
 
-export default RouteGuide;
+export default connect(null, null)(RouteGuide);
