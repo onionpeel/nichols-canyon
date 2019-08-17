@@ -50,20 +50,35 @@
 // let newFunc = display();
 // newFunc();
 
-const obj = {
-  value: 5,
+// const obj = {
+//   value: 5,
+//
+//   display() {
+//     this.value = 10;
+//     console.log('display: ', this.value);
+//
+//     let innerDisplay = newValue => {
+//       this.value = newValue;
+//     };
+//
+//     innerDisplay(15);
+//     console.log("new value: ", this.value);
+//   }
+// };
+//
+// obj.display();
 
-  display() {
-    this.value = 10;
-    console.log('display: ', this.value);
-
-    let innerDisplay = newValue => {
-      this.value = newValue;
-    };
-
-    innerDisplay(15);
-    console.log("new value: ", this.value);
-  }
+const promise = async () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("success!");
+    }, 1000);
+  });
 };
 
-obj.display();
+try{
+  const result = await promise();
+  console.log(result);
+} catch(err) {
+  console.log(err);
+}

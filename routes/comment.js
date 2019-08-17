@@ -12,7 +12,8 @@ router.post('/', tokenAuth, async (req, res) => {
 
   let comment = new Comment({
     text: req.body.text,
-    user: user._id
+    user: user._id,
+    userName: user.name
   });
 
   try {
