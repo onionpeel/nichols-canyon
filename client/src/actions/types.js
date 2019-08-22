@@ -4,3 +4,5 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const USER_LOADED = "USER_LOADED";
 export const ALL_COMMENTS = "ALL_COMMENTS";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";

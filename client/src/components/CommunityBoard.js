@@ -5,8 +5,10 @@ import Footer from './Footer';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getAllComments} from '../actions/commentActions.js';
+import CommentModal from './CommentModal';
+import EditModal from './EditModal'
 
-const CommunityBoard = ({comments, getAllComments}) => {
+const CommunityBoard = ({comments, userId, getAllComments}) => {
   useEffect(() => {
     getAllComments();
   });
@@ -17,21 +19,27 @@ const CommunityBoard = ({comments, getAllComments}) => {
         <Container>
           <Row className="justify-content-center">
             <Col md={8}>
-              <Card style={{marginTop: '25px'}}>
+
+              <Card style={{marginTop: '25px', marginBottom: '15px'}}>
                 <Card.Img variant="top" src="/assets/dumping.jpg" />
                 <Card.Body>
                   <Card.Title>
-                    Get advice or share your expertise!
+                    Contribute to the Nichols knowledge!
                   </Card.Title>
+                  <CommentModal />
                 </Card.Body>
               </Card>
 
               <ListGroup>
-                {comments.map(({_id, text, userName}) => (
+                {comments.map(({user, text, userName, _id}) => (
                   <ListGroup.Item key={_id}>
-                    <b>{text}</b>
+                    {text}
                     <br />
-                    {userName}
+                    <i>{userName}</i>
+
+                    {(userId === user) &&
+                      <EditModal commentId={_id} commentText={text}/>
+                    }
                   </ListGroup.Item>
                 ))}
               </ListGroup>
@@ -46,7 +54,8 @@ const CommunityBoard = ({comments, getAllComments}) => {
 };
 
 const mapStateToProps = state => ({
-  comments: state.comm.comments
+  comments: state.comm.comments,
+  userId: state.auth.user._id
 });
 
 const mapDispatchToProps = {
