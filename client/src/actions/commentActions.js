@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ALL_COMMENTS, ADD_COMMENT, DELETE_COMMENT} from './types';
+import {ALL_COMMENTS, ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT} from './types';
 
 export const getAllComments = () => async (dispatch, getState) => {
   try{
@@ -58,9 +58,9 @@ export const deleteComment = id => async dispatch => {
     if(token) {
       const res = await axios.delete(`/comment/${id}`, config);
       const comments = await axios.get('/comment', config);
-        type: DELETE_COMMENT,
         dispatch({
-        payload: comments.data
+          type: DELETE_COMMENT,
+          payload: comments.data
       });
     };
   }catch(err) {
@@ -68,6 +68,25 @@ export const deleteComment = id => async dispatch => {
   };
 };
 
-export const updateComment = id = async dispatch => {
-  
+export const updateComment = (comment, id) => async dispatch => {
+  try{
+    const token = localStorage.getItem('token');
+    const config = {
+      headers: {
+        'x-auth-token': token,
+        'Content-Type': 'application/json'
+      }
+    };
+
+    if(token) {
+      const res = await axios.patch(`/comment/${id}`, comment, config);
+      const comments = await axios.get('/comment', config);
+      dispatch({
+        type: UPDATE_COMMENT,
+        payload: comments.data
+      });
+    };
+  }catch(err) {
+    console.log('Add comment error', err);
+  };
 };

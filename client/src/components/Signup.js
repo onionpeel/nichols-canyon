@@ -43,7 +43,7 @@ const Signup = ({isAuthenticated, register}) => {
               <h4>
                 Because this is only a developmental project, do not use a real
                 email account.  Make up a fake email address.  Be sure to remember
-                your fake address so you can login later.
+                your fake address and password so you can login later.
               </h4>
             </Col>
           </Row>

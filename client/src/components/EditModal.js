@@ -21,14 +21,14 @@ function EditModal({commentId, commentText, deleteComment, updateComment}) {
 
   const onSubmit = e => {
     e.preventDefault();
-    const newComment = {
+    const updatedComment = {
       text: comment
     };
     if(comment.length > 0) {
-      updateComment(newComment);
+      updateComment(updatedComment, commentId);
     };
 
-    setComment('');
+    // setComment('');
     handleClose();
   };
 

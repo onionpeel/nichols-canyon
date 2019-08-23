@@ -1,4 +1,4 @@
-import {ALL_COMMENTS, ADD_COMMENT, DELETE_COMMENT} from '../actions/types';
+import {ALL_COMMENTS, ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT} from '../actions/types';
 
 const initialState = {
   comments: []
@@ -8,6 +8,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ALL_COMMENTS:
     case DELETE_COMMENT:
+    case UPDATE_COMMENT:
       return {
         ...state,
         comments: action.payload
