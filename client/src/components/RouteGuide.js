@@ -1,10 +1,9 @@
 import React from 'react';
 import {Container, Card, Row, Col, Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
-
+import Footer from './Footer';
 
 const RouteGuide = () => {
-
   return (
     <div>
       <Container>
@@ -33,6 +32,7 @@ const RouteGuide = () => {
           </div>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

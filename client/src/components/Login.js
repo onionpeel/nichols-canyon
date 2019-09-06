@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {Form, Button, Container, Row, Col} from 'react-bootstrap';
+import {Form, Button, Container, Row, Col, Alert} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 import {login} from '../actions/authActions';
+import {clearError} from '../actions/errorActions';
 
-const Login = ({isAuthenticated, login}) => {
+const Login = ({isAuthenticated, login, errorMessage, clearError}) => {
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -25,6 +26,14 @@ const Login = ({isAuthenticated, login}) => {
     });
   };
 
+  const handleClearInput = e => {
+    setUser({
+        email: '',
+        password: ''
+    });
+    clearError();
+  };
+
   if(isAuthenticated) {
     return <Redirect to='/mydashboard'/>
   };
@@ -34,6 +43,7 @@ const Login = ({isAuthenticated, login}) => {
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
+            {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : null}
             <Form onSubmit={handleOnSubmit}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -60,6 +70,13 @@ const Login = ({isAuthenticated, login}) => {
                 Submit
               </Button>
             </Form>
+            {errorMessage ?
+               <>
+                <br />
+                <Button variant="secondary" onClick={handleClearInput}> Clear Form </Button>
+               </> :
+              null
+            }
           </Col>
         </Row>
 
@@ -78,11 +95,13 @@ const Login = ({isAuthenticated, login}) => {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  errorMessage: state.err.errorMessage
 });
 
 const mapDispatchToProps = {
-  login
+  login,
+  clearError
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

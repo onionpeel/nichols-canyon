@@ -24,13 +24,13 @@ router.post(
 
       const existingUser = await User.findOne({email});
       if(!existingUser) {
-        return res.status(400).json({errors: [{message: 'User does not exist'}]});
+        return res.status(400).json({errors: [{msg: 'Invalid credentials'}]});
       };
 
       //Decrypt password
       const match = await bcrypt.compare(password, existingUser.password);
       if(!match) {
-        return res.status(400).json({errors: [{message: 'Invalid credentials'}]});
+        return res.status(400).json({errors: [{msg: 'Invalid credentials'}]});
       };
       //Create token and send token back to client
       const payload = {
@@ -43,7 +43,7 @@ router.post(
       res.status(201).json({token, user});
     }catch(err) {
       console.log(err);
-      res.status(500).json({message: 'A new user was not created'});
+      res.status(500).json({msg: 'A new user was not created'});
     };
   }
 );

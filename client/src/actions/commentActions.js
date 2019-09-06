@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {ALL_COMMENTS, ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT} from './types';
+import {setError} from './errorActions';
 
 export const getAllComments = () => async (dispatch, getState) => {
   try{
@@ -19,7 +20,7 @@ export const getAllComments = () => async (dispatch, getState) => {
       });
     };
   }catch(err) {
-    console.log('Get all comments error', err);
+    dispatch(setError(err.response.data, err.response.status));
   };
 };
 
@@ -41,7 +42,7 @@ export const addComment = comment => async dispatch => {
       });
     };
   }catch(err) {
-    console.log('Add comment error', err);
+    dispatch(setError(err.response.data, err.response.status));
   };
 };
 
@@ -56,7 +57,7 @@ export const deleteComment = id => async dispatch => {
     };
 
     if(token) {
-      const res = await axios.delete(`/comment/${id}`, config);
+      await axios.delete(`/comment/${id}`, config);
       const comments = await axios.get('/comment', config);
         dispatch({
           type: DELETE_COMMENT,
@@ -79,7 +80,7 @@ export const updateComment = (comment, id) => async dispatch => {
     };
 
     if(token) {
-      const res = await axios.patch(`/comment/${id}`, comment, config);
+      await axios.patch(`/comment/${id}`, comment, config);
       const comments = await axios.get('/comment', config);
       dispatch({
         type: UPDATE_COMMENT,

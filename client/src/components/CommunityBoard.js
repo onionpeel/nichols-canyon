@@ -1,12 +1,10 @@
 import React, {useEffect} from 'react';
-import {ListGroup, Card, Container, Row, Col} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
+import {ListGroup, Card, Container, Row, Col, Button} from 'react-bootstrap';
 import Footer from './Footer';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getAllComments} from '../actions/commentActions.js';
 import CommentModal from './CommentModal';
-import EditModal from './EditModal'
+import EditModal from './EditModal';
 
 const CommunityBoard = ({comments, userId, getAllComments}) => {
   useEffect(() => {
@@ -46,6 +44,15 @@ const CommunityBoard = ({comments, userId, getAllComments}) => {
 
             </Col>
           </Row>
+
+          <Row className="justify-content-center">
+            <div style={{marginTop: "25px"}}>
+              <Col md={8}>
+                <Button variant="link" href="/mydashboard">Go back to My Dashboard</Button>
+              </Col>
+            </div>
+          </Row>
+
         </Container>
       </div>
       <Footer />

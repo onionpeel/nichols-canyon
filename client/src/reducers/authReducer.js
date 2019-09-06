@@ -1,4 +1,4 @@
-import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT_SUCCESS, LOGIN_SUCCESS, USER_LOADED} from '../actions/types';
+import {REGISTER_SUCCESS, LOGOUT_SUCCESS, LOGIN_SUCCESS, USER_LOADED} from '../actions/types';
 
 const initialState = {
   isAuthenticated: null,

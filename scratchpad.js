@@ -120,3 +120,53 @@
 // const arr = [1,2,3,4];
 // arr.push(5,6,7);
 // console.log(arr);
+
+// const arr = [1,2,3];
+// const arrCopy = [...arr];
+// arrCopy.reverse();
+// console.log('arr: ', arr);
+// console.log('arrCopy: ', arrCopy);
+
+// const arr = [1,2,3,4,5];
+//
+// const reverseArray = array => {
+//   const copy = [...array];
+//   return copy.reverse();
+// };
+//
+// console.log(reverseArray(arr));
+
+// const str = 'abcdecba';
+//
+// const isPalindrome = string => {
+//   const array = [...string];
+//   let palindrome = true;
+//   for (let i = 0; i < array.length; i++) {
+//     if(array[i] !== array[array.length - 1 - i]){
+//       palindrome = false;
+//       break
+//     };
+//   };
+//
+//   return palindrome ? 'it is a palindrome' : 'not a palindrome';
+//
+// };
+//
+// isPalindrome(str);
+
+// const yum = ['the', 'big', 'apple'];
+// yum.splice(2, 0, 'red');
+// console.log(yum);
+
+// const num = [1,2,3,4,5];
+// num.splice(2, 1, 7);
+// console.log(num);
+
+// const num = [1,2,3,4,5,6,7,8];
+// num.splice(-3, 1);
+// console.log(num);
+
+// const num = [1,2,3,4,5];
+//
+// const segment = num.slice(1, -2);
+// console.log(segment);

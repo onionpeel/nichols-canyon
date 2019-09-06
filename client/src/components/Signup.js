@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Form, Container, Navbar, Row, Col, Button} from 'react-bootstrap';
+import {Form, Container, Navbar, Row, Col, Button, Alert} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {register} from '../actions/authActions';
+import {clearError} from '../actions/errorActions';
 
-const Signup = ({isAuthenticated, register}) => {
+const Signup = ({isAuthenticated, register, errorMessage, clearError}) => {
   const [profile, setProfile] = useState({
       name: '',
       email: '',
@@ -34,6 +35,15 @@ const Signup = ({isAuthenticated, register}) => {
     return <Redirect to='/mydashboard'/>
   };
 
+  const handleClearInput = e => {
+    setProfile({
+        name: '',
+        email: '',
+        password: ''
+    });
+    clearError();
+  };
+
   return (
     <div style={{marginTop: "25px"}}>
       <div style={{color: "red"}}>
@@ -54,6 +64,7 @@ const Signup = ({isAuthenticated, register}) => {
         <Container>
           <Row className="justify-content-center">
             <Col md={6}>
+              {errorMessage ? <Alert variant="danger">{errorMessage}</Alert> : null}
               <Form onSubmit={handleOnSubmit}>
                 <Form.Group controlId="formGroupName">
                   <Form.Label>Name</Form.Label>
@@ -89,6 +100,13 @@ const Signup = ({isAuthenticated, register}) => {
                   Submit
                 </Button>
               </Form>
+              {errorMessage ?
+                 <>
+                  <br />
+                  <Button variant="secondary" onClick={handleClearInput}> Clear Form </Button>
+                 </> :
+                null
+              }
             </Col>
           </Row>
         </Container>
@@ -106,11 +124,13 @@ const Signup = ({isAuthenticated, register}) => {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  errorMessage: state.err.errorMessage
 });
 
 const mapDispatchToProps = {
-  register
+  register,
+  clearError
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

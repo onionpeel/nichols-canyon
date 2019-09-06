@@ -61,7 +61,7 @@ router.post(
       res.status(201).json({token, user});
     }catch(err) {
       console.log(err);
-      res.status(500).json({message: 'A new user was not created'});
+      res.status(500).json({errors: [{msg: "A new profile was not created"}]});
     };
   }
 );
@@ -101,7 +101,7 @@ router.get('/me', tokenAuth, async (req, res) => {
     const user = await User.findById({_id: req.user});
     res.status(200).json(user);
   }catch(err) {
-    res.status(400).json({message: 'User not found'});
+    res.status(400).json({msg: 'User not found'});
   };
 });
 

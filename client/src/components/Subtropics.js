@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card, Container, Row, Col, Button} from 'react-bootstrap';
+import Footer from './Footer';
 
 const Subtropics = () => {
 
@@ -96,6 +97,7 @@ const Subtropics = () => {
           </div>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 };

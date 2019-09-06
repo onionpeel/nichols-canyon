@@ -17,7 +17,7 @@ const About = () => {
                 <br />
                 <br />
                 <Card.Text>
-                  2019 Le Tour de Nichols&#8482;
+                  {new Date().getFullYear()} Le Tour de Nichols&#8482;
                 </Card.Text>
               </Card.Body>
             </Card>

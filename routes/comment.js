@@ -18,10 +18,10 @@ router.post('/', tokenAuth, async (req, res) => {
 
   try {
     const newComment = await comment.save();
-    res.status(201).json(newComment);
+    res.status(201).send(newComment);
   } catch(err) {
     console.log(err);
-    res.status(500).send('A server error has occurred.');
+    res.status(500).send('Unable to post message');
   };
 });
 
@@ -31,10 +31,9 @@ router.post('/', tokenAuth, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const comments = await Comment.find();
-    res.status(200).json(comments);
+    res.status(200).send(comments);
   } catch(err) {
-    console.log(err);
-    res.status(400).send('The request has failed.');
+    res.status(400).send('Unable to retrieve comments');
   };
 });
 
@@ -45,10 +44,9 @@ router.delete('/:id', tokenAuth, async (req, res) => {
   try {
     const commentId = req.params.id;
     const comments = await Comment.findOneAndDelete({_id: commentId, user: req.user});
-    res.status(200).json({message: 'Comment deleted'});
+    res.status(200).send({message: 'Comment deleted'});
   } catch(err) {
-    console.log(err);
-    res.status(400).send('The request has failed.');
+    res.status(400).send({message: 'Unable to delete comment'});
   };
 });
 
@@ -62,10 +60,9 @@ router.patch('/:id', tokenAuth, async (req, res) => {
 
     const update = await Comment.findOneAndUpdate(
       {_id: commentId, user: req.user}, {text}, {new: true});
-    res.status(200).json(update);
+    res.status(200).send(update);
   } catch(err) {
-    console.log(err);
-    res.status(400).send('The request has failed.');
+    res.status(400).send({message: 'Unable to update comment'});
   };
 });
 

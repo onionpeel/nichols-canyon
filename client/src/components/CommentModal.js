@@ -3,7 +3,7 @@ import {Button, Modal, Form, Container} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {addComment} from '../actions/commentActions';
 
-const CommentModal = ({addComment}) => {
+const CommentModal = ({addComment, error, errorStatus}) => {
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState('');
 
@@ -63,8 +63,13 @@ const CommentModal = ({addComment}) => {
   );
 };
 
+const mapStateToProps = state => ({
+  error: state.err,
+  errorStatus: state.err.errorStatus
+});
+
 const mapDispatchToProps = {
   addComment
 };
 
-export default connect(null, mapDispatchToProps)(CommentModal);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentModal);

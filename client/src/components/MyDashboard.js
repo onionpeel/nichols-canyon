@@ -1,6 +1,5 @@
 import React from 'react';
 import {ListGroup, Card, Container, Row, Col} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
 import Footer from './Footer';
 import {Link} from 'react-router-dom';
 

@@ -1,7 +1,6 @@
-import React, {useEffect, Component} from 'react';
+import React, {useEffect} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Button} from 'react-bootstrap';
 
 import Home from './components/Home';
 import Header from './components/Header';

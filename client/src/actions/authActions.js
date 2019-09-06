@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {REGISTER_SUCCESS, REGISTER_FAIL, LOGOUT_SUCCESS, LOGIN_SUCCESS, USER_LOADED} from './types';
+import {REGISTER_SUCCESS, LOGOUT_SUCCESS, LOGIN_SUCCESS, USER_LOADED} from './types';
+import {setError, clearError} from './errorActions';
 
 export const loadUser = () => async (dispatch, getState) => {
   try{
@@ -39,8 +40,10 @@ export const register = ({name, email, password}) => async dispatch => {
     });
     const token = res.data.token;
     localStorage.setItem('token', token);
+
+    dispatch(clearError());
   }catch (err) {
-    console.log(err);
+    dispatch(setError(err.response.data.errors[0].msg));
   };
 };
 
@@ -66,9 +69,12 @@ export const login = ({email, password}) => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data
     });
+
+    dispatch(clearError());
+
     const token = res.data.token;
     localStorage.setItem('token', token);
   }catch (err) {
-    console.log(err);
+    dispatch(setError(err.response.data.errors[0].msg));
   };
 };
